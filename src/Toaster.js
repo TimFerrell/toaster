@@ -12,7 +12,9 @@ var Toaster = (function () {
         return this;
     }
     Toaster.prototype.doesNativeWebAnimationsAPIExist = function () {
-        return typeof document.createElement('div')["animate"] === "function";
+        var doesExist = typeof document.createElement('div')["animate"] === "function";
+        console.log("Web Animations Exists:", doesExist);
+        return doesExist;
     };
     ;
     Toaster.prototype.loadWebAnimationsPolyfill = function () {

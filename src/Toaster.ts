@@ -22,7 +22,9 @@ class Toaster {
     }
 
     public doesNativeWebAnimationsAPIExist():boolean {
-        return typeof document.createElement('div')["animate"] === "function"
+        let doesExist = typeof document.createElement('div')["animate"] === "function";
+        console.log("Web Animations Exists:", doesExist);
+        return doesExist;
     };
 
     public loadWebAnimationsPolyfill():void {
