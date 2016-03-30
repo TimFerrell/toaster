@@ -5,18 +5,20 @@
     <!-- test runner needed to run and display results of tests -->
     <title>Mocha Tests</title>
     <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+    <script src="../node_modules/mocha/mocha.js"></script>
 </head>
 <body>
     <div id="mocha"></div>
     <div id="messages"></div>
     <div id="fixtures"></div>
-    <script src="../node_modules/mocha/mocha.js"></script>
     <script src="../dist/Toaster.js"></script>
     <script>
-        console.log("Toaster is:"+typeof(Toaster))
-        mocha.setup({
-            ui: 'bdd'
-        });
+        window.onload = function () {
+            console.log("Toaster is:" + typeof(Toaster))
+            mocha.setup({
+                ui: 'bdd'
+            });
+        }
     </script>
     <script src="ToasterTest.js"></script>
     <script>
