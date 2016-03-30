@@ -18,8 +18,7 @@
   "scripts": {
     "prepublish": "tsc src/Toaster.ts --outDir dist --module commonjs -d && tsc test/*Test.ts --outDir test --module commonjs --target ES3",
     "pretest": "tsc src/Toaster.ts --outDir dist --module commonjs -d && tsc test/*Test.ts --outDir test --module commonjs --target ES3",
-    "test": "mocha-phantomjs test/test.html",
-    "browserstack-test": "browserstack-runner"
+    "test": "mocha-phantomjs test/test.html"
   },
   "author": "",
   "license": "MIT"

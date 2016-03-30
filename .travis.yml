@@ -8,7 +8,7 @@ install:
 
 script:
   - npm test
-  - npm browserstack-test
+  - browserstack-runner
 
 cache:
   directories:
