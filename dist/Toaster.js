@@ -16,7 +16,6 @@ var Toaster = (function () {
         console.log("Web Animations Exists:", doesExist);
         return doesExist;
     };
-    ;
     Toaster.prototype.loadWebAnimationsPolyfill = function () {
         var scriptTag = document.createElement('script');
         scriptTag.setAttribute('src', '../node_modules/web-animations-js/web-animations.min.js');

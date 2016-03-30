@@ -4,7 +4,7 @@ node_js:
 
 install:
   - npm install -g gulp mocha browserstack-runner
-  - npm install
+  - npm install codecov
 
 script:
   - npm test
@@ -18,3 +18,4 @@ branches:
   only:
     - develop
     - master
+./node_modules/.bin/codecov

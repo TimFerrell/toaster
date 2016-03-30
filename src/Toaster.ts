@@ -25,7 +25,7 @@ class Toaster {
         let doesExist = typeof document.createElement('div')["animate"] === "function";
         console.log("Web Animations Exists:", doesExist);
         return doesExist;
-    };
+    }
 
     public loadWebAnimationsPolyfill():void {
         let scriptTag = document.createElement('script');
