@@ -1,0 +1,25 @@
+{
+  "name": "toaster-js",
+  "version": "3.0.0-alpha",
+  "description": "",
+  "main": "toastr.js",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "typescript": "^1.8.9"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^3.2.0",
+    "mocha": "^2.4.5",
+    "mocha-phantomjs": "^4.0.2",
+    "tsc": "^1.20150623.0",
+    "web-animations-js": "^2.1.4"
+  },
+  "scripts": {
+    "prepublish": "tsc src/Toaster.ts --outDir dist --module commonjs -d && tsc test/*Test.ts --outDir test --module commonjs --target ES3",
+    "pretest": "tsc src/Toaster.ts --outDir dist --module commonjs -d && tsc test/*Test.ts --outDir test --module commonjs --target ES3",
+    "test": "mocha-phantomjs test/test.html"
+  },
+  "author": "",
+  "license": "ISC"
+}
