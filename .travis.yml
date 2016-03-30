@@ -3,11 +3,12 @@ node_js:
   - "0.10"
 
 install:
-  - npm install -g gulp mocha
+  - npm install -g gulp mocha browserstack-runner
   - npm install
 
 script:
   - npm test
+  - npm browserstack-test
 
 cache:
   directories:
