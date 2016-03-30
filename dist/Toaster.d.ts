@@ -12,6 +12,17 @@ declare class Toaster {
     constructor(options: any);
     doesNativeWebAnimationsAPIExist(): boolean;
     loadWebAnimationsPolyfill(): void;
+    /**
+     * Gets the container. Creates it if it does not already exist, using provided options.
+     * @param options
+     */
+    getContainer(options?: IToasterOptions): Element;
+    /**
+     * Creates the Toaster container.
+     * @param options
+     * @returns {Element}
+     */
+    private createContainer(options);
     notify(type: any, title: any, message: any): void;
     private constructNotificationElement(type, title, message);
     private publish(notificationInstance, notificationElement);
@@ -49,6 +60,31 @@ declare enum NotificationClearMethod {
     IMMEDIATE = 0,
     ANIMATE_OUT = 1,
 }
-interface INotificationSubscription {
-    event(notificationInstance: Notification, notificationElement: Element): any;
+interface IToasterNotificationSubscription {
+    notificationInstance: Notification;
+    notificationElement: Element;
+}
+declare class ToasterOptions implements IToasterOptions {
+    toastClass: string;
+    containerId: string;
+    titleClass: string;
+    messageClass: string;
+    showDuration: Number;
+    hideDuration: Number;
+    timeout: Number;
+    extendedTimeout: Number;
+    positionClass: string;
+    containerTarget: string;
+}
+interface IToasterOptions {
+    toastClass: string;
+    containerId: string;
+    titleClass: string;
+    messageClass: string;
+    showDuration: Number;
+    hideDuration: Number;
+    timeout: Number;
+    extendedTimeout: Number;
+    positionClass: string;
+    containerTarget: string;
 }

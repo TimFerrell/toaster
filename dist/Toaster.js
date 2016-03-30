@@ -13,7 +13,6 @@ var Toaster = (function () {
     }
     Toaster.prototype.doesNativeWebAnimationsAPIExist = function () {
         var doesExist = typeof document.createElement('div')["animate"] === "function";
-        console.log("Web Animations Exists:", doesExist);
         return doesExist;
     };
     Toaster.prototype.loadWebAnimationsPolyfill = function () {
@@ -24,6 +23,39 @@ var Toaster = (function () {
         this.webAnimationsApiPolyfillLoaded = true;
     };
     ;
+    /**
+     * Gets the container. Creates it if it does not already exist, using provided options.
+     * @param options
+     */
+    Toaster.prototype.getContainer = function (options) {
+        var internalOptions;
+        // If no options provided, use the defaults.
+        if (typeof (options) === "undefined") {
+            internalOptions = new ToasterOptions();
+        }
+        else {
+            internalOptions = options;
+        }
+        this.container = document.getElementById(internalOptions.containerId);
+        if (this.container == null) {
+            this.container = this.createContainer(internalOptions);
+        }
+        return this.container;
+    };
+    /**
+     * Creates the Toaster container.
+     * @param options
+     * @returns {Element}
+     */
+    Toaster.prototype.createContainer = function (options) {
+        this.container = document.createElement('div');
+        this.container.classList.add(options.positionClass);
+        this.container.setAttribute('id', options.containerId);
+        this.container.setAttribute('aria-live', 'polite');
+        this.container.setAttribute("role", "alert");
+        document.querySelector(options.containerTarget).appendChild(this.container);
+        return this.container;
+    };
     Toaster.prototype.notify = function (type, title, message) {
         var notificationInstance = new Notification();
         notificationInstance.NotificationType = type;
@@ -106,3 +138,18 @@ var NotificationClearMethod;
     NotificationClearMethod[NotificationClearMethod["IMMEDIATE"] = 0] = "IMMEDIATE";
     NotificationClearMethod[NotificationClearMethod["ANIMATE_OUT"] = 1] = "ANIMATE_OUT";
 })(NotificationClearMethod || (NotificationClearMethod = {}));
+var ToasterOptions = (function () {
+    function ToasterOptions() {
+        this.toastClass = "toast";
+        this.containerId = "toast-container";
+        this.titleClass = "toast-title";
+        this.messageClass = "toast-message";
+        this.showDuration = 1000;
+        this.hideDuration = 1000;
+        this.timeout = 1000;
+        this.extendedTimeout = 1000;
+        this.positionClass = "top-right";
+        this.containerTarget = "body";
+    }
+    return ToasterOptions;
+}());

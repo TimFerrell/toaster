@@ -23,7 +23,6 @@ class Toaster {
 
     public doesNativeWebAnimationsAPIExist():boolean {
         let doesExist = typeof document.createElement('div')["animate"] === "function";
-        console.log("Web Animations Exists:", doesExist);
         return doesExist;
     }
 
@@ -34,6 +33,46 @@ class Toaster {
         document.getElementsByTagName('body')[0].appendChild(scriptTag);
         this.webAnimationsApiPolyfillLoaded = true;
     };
+
+    /**
+     * Gets the container. Creates it if it does not already exist, using provided options.
+     * @param options
+     */
+    public getContainer(options?:IToasterOptions):Element {
+        let internalOptions:IToasterOptions;
+
+        // If no options provided, use the defaults.
+        if(typeof(options) === "undefined") {
+            internalOptions = new ToasterOptions();
+        }else{
+            internalOptions = options;
+        }
+
+        this.container = document.getElementById(internalOptions.containerId);
+
+        if (this.container == null) {
+            this.container = this.createContainer(internalOptions);
+        }
+
+        return this.container;
+    }
+
+    /**
+     * Creates the Toaster container.
+     * @param options
+     * @returns {Element}
+     */
+    private createContainer(options:IToasterOptions):Element {
+        this.container = document.createElement('div');
+        this.container.classList.add(options.positionClass);
+        this.container.setAttribute('id',options.containerId);
+        this.container.setAttribute('aria-live','polite');
+        this.container.setAttribute("role","alert");
+
+        document.querySelector(options.containerTarget).appendChild(this.container);
+
+        return this.container;
+    }
 
     public notify(type, title, message):void {
 
@@ -97,7 +136,7 @@ class Toaster {
      * Clears all notifications, animating them out.
      */
     private clearAllNotificationsWithAnimations():void {
-        this.visibleNotifications.forEach(function (element) {
+        this.visibleNotifications.forEach(function (element:IToasterNotificationSubscription) {
             this.clearNotification(element.notificationInstance, element.notificationElement)
         });
     }
@@ -133,6 +172,33 @@ enum NotificationClearMethod {
     ANIMATE_OUT
 }
 
-interface INotificationSubscription {
-    event(notificationInstance:Notification, notificationElement:Element)
+interface IToasterNotificationSubscription {
+    notificationInstance:Notification;
+    notificationElement:Element;
+}
+
+class ToasterOptions implements IToasterOptions {
+    toastClass:string = "toast";
+    containerId:string = "toast-container";
+    titleClass:string = "toast-title";
+    messageClass:string = "toast-message";
+    showDuration:Number = 1000;
+    hideDuration:Number = 1000;
+    timeout:Number = 1000;
+    extendedTimeout:Number = 1000;
+    positionClass:string = "top-right";
+    containerTarget:string = "body";
+}
+
+interface IToasterOptions {
+    toastClass:string;
+    containerId:string;
+    titleClass:string;
+    messageClass:string;
+    showDuration:Number;
+    hideDuration:Number;
+    timeout:Number;
+    extendedTimeout:Number;
+    positionClass:string;
+    containerTarget:string;
 }
