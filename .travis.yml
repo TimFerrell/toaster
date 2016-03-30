@@ -18,4 +18,3 @@ branches:
   only:
     - develop
     - master
-./node_modules/.bin/codecov
