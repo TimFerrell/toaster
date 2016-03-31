@@ -47,6 +47,7 @@ describe('Toaster', () => {
             if(currentCount===modifiedCount) {
                 throw new Error("Container child count did not change when notification added.")
             }
+            //
         });
         it('should create an info notification', () => {
             let container = subject.getContainer();
