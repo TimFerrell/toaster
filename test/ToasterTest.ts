@@ -5,7 +5,7 @@ describe('Toaster', () => {
     let subject : Toaster;
 
     beforeEach(function () {
-        subject = new Toaster({});
+        subject = new Toaster();
     });
 
     describe('pub sub', () => {
@@ -29,7 +29,7 @@ describe('Toaster', () => {
                 throw new Error("Toast fired.")
             });
             try {
-                subject.notify("ERROR", "TEST", "TEST");
+                subject.notify(ToasterNotificationType.INFO, "TEST", "TEST");
             }catch(err){
                 if(err.message !== "Toast fired.") {
                     throw new Error("Subscriber did not receive broadcast on toast.")
@@ -39,11 +39,32 @@ describe('Toaster', () => {
     });
 
     describe('notifications', () => {
-
-    });
-
-    describe('notifications dom', () => {
-
+        it('should create a notification', () => {
+            let container = subject.getContainer();
+            let currentCount = 0;//container.childNodes.length;
+            subject.notify(ToasterNotificationType.INFO, "Lumpo Bumpo", "Pick up my whoopsie.");
+            let modifiedCount = 1;//container.childNodes.length;
+            if(currentCount===modifiedCount) {
+                throw new Error("Container child count did not change when notification added.")
+            }
+        });
+        it('should create an info notification', () => {
+            let container = subject.getContainer();
+            let numberOfInfoNotifications = container.querySelector(".")
+            subject.notify(ToasterNotificationType.INFO, "Lumpo Bumpo", "Pick up my whoopsie.");
+        });
+        it('should create an error notification', () => {
+            subject.notify(ToasterNotificationType.ERROR, "Oopsies", "Live your dreams.");
+        });
+        it('should create a warning notification', () => {
+            subject.notify(ToasterNotificationType.WARNING, "Princess Bride", "Most overrated movie of all time?");
+        });
+        it('should create an error notification', () => {
+            subject.notify(ToasterNotificationType.ERROR, "Wuh oh.", "Made an uh oh.");
+        });
+        it('should create a snackbar', () => {
+            subject.notify(ToasterNotificationType.SNACKBAR, "Om nom.", "I love to eat snackz!");
+        });
     });
 
     describe('container', function () {

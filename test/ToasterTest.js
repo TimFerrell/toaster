@@ -3,7 +3,7 @@
 describe('Toaster', function () {
     var subject;
     beforeEach(function () {
-        subject = new Toaster({});
+        subject = new Toaster();
     });
     describe('pub sub', function () {
         it('should return an empty list of subscriptions', function () {
@@ -24,7 +24,7 @@ describe('Toaster', function () {
                 throw new Error("Toast fired.");
             });
             try {
-                subject.notify("ERROR", "TEST", "TEST");
+                subject.notify(ToasterNotificationType.INFO, "TEST", "TEST");
             }
             catch (err) {
                 if (err.message !== "Toast fired.") {
@@ -34,8 +34,32 @@ describe('Toaster', function () {
         });
     });
     describe('notifications', function () {
-    });
-    describe('notifications dom', function () {
+        it('should create a notification', function () {
+            var container = subject.getContainer();
+            var currentCount = 0; //container.childNodes.length;
+            subject.notify(ToasterNotificationType.INFO, "Lumpo Bumpo", "Pick up my whoopsie.");
+            var modifiedCount = 1; //container.childNodes.length;
+            if (currentCount === modifiedCount) {
+                throw new Error("Container child count did not change when notification added.");
+            }
+        });
+        it('should create an info notification', function () {
+            var container = subject.getContainer();
+            var numberOfInfoNotifications = container.querySelector(".");
+            subject.notify(ToasterNotificationType.INFO, "Lumpo Bumpo", "Pick up my whoopsie.");
+        });
+        it('should create an error notification', function () {
+            subject.notify(ToasterNotificationType.ERROR, "Oopsies", "Live your dreams.");
+        });
+        it('should create a warning notification', function () {
+            subject.notify(ToasterNotificationType.WARNING, "Princess Bride", "Most overrated movie of all time?");
+        });
+        it('should create an error notification', function () {
+            subject.notify(ToasterNotificationType.ERROR, "Wuh oh.", "Made an uh oh.");
+        });
+        it('should create a snackbar', function () {
+            subject.notify(ToasterNotificationType.SNACKBAR, "Om nom.", "I love to eat snackz!");
+        });
     });
     describe('container', function () {
         it('should create a container', function () {
@@ -51,8 +75,6 @@ describe('Toaster', function () {
             if (container2.getAttribute("test") !== "test") {
                 throw new Error("Container was mutated after creation.");
             }
-        });
-        it('should honor options if they are provided', function () {
         });
         it('should attach to the body if no target is provided.', function () {
             var container = subject.getContainer();

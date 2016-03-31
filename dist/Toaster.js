@@ -7,14 +7,21 @@ var Toaster = (function () {
         this.notificationId = null;
         this.notificationType = null;
         this.previousToast = null;
-        this.options = options;
+        this.options = options || new ToasterOptions();
         this.subscribers = [];
         return this;
     }
+    /**
+     * Checks if native web animations API exists.
+     * @returns {boolean}
+     */
     Toaster.prototype.doesNativeWebAnimationsAPIExist = function () {
         var doesExist = typeof document.createElement('div')["animate"] === "function";
         return doesExist;
     };
+    /**
+     * Loads the web animations API polyfill, if necessary.
+     */
     Toaster.prototype.loadWebAnimationsPolyfill = function () {
         var scriptTag = document.createElement('script');
         scriptTag.setAttribute('src', '../node_modules/web-animations-js/web-animations.min.js');
@@ -28,17 +35,13 @@ var Toaster = (function () {
      * @param options
      */
     Toaster.prototype.getContainer = function (options) {
-        var internalOptions;
         // If no options provided, use the defaults.
-        if (typeof (options) === "undefined") {
-            internalOptions = new ToasterOptions();
+        if (typeof (options) !== "undefined") {
+            this.options = options;
         }
-        else {
-            internalOptions = options;
-        }
-        this.container = document.getElementById(internalOptions.containerId);
+        this.container = document.getElementById(this.options.containerId);
         if (this.container == null) {
-            this.container = this.createContainer(internalOptions);
+            this.container = this.createContainer(this.options);
         }
         return this.container;
     };
@@ -62,6 +65,9 @@ var Toaster = (function () {
         notificationInstance.Title = title;
         notificationInstance.Message = message;
         var notificationElement = this.constructNotificationElement(type, title, message);
+        if (this.container === null) {
+            this.container = this.getContainer();
+        }
         if (!(this.visibleNotifications instanceof Array)) {
             this.visibleNotifications = [];
         }
@@ -70,8 +76,32 @@ var Toaster = (function () {
             notificationElement: notificationElement
         });
         this.publish(notificationInstance, notificationElement);
+        this.container.appendChild(notificationElement);
+        return notificationElement;
     };
     Toaster.prototype.constructNotificationElement = function (type, title, message) {
+        var toastClass;
+        switch (type) {
+            case ToasterNotificationType.ERROR:
+                toastClass = "toaster-error";
+                break;
+            case ToasterNotificationType.INFO:
+                toastClass = "toaster-info";
+                break;
+            case ToasterNotificationType.SNACKBAR:
+                toastClass = "toaster-snackbar";
+                break;
+            case ToasterNotificationType.SUCCESS:
+                toastClass = "toaster-success";
+                break;
+            case ToasterNotificationType.WARNING:
+                toastClass = "toaster-warning";
+                break;
+        }
+        var element = document.createElement('div');
+        element.classList.add(this.options.toastClass);
+        element.classList.add(toastClass);
+        return element;
     };
     Toaster.prototype.publish = function (notificationInstance, notificationElement) {
         this.subscribers.forEach(function (subscriber) {
@@ -118,14 +148,14 @@ var Notification = (function () {
     }
     return Notification;
 }());
-var NotificationType;
-(function (NotificationType) {
-    NotificationType[NotificationType["SUCCESS"] = 0] = "SUCCESS";
-    NotificationType[NotificationType["INFO"] = 1] = "INFO";
-    NotificationType[NotificationType["WARNING"] = 2] = "WARNING";
-    NotificationType[NotificationType["ERROR"] = 3] = "ERROR";
-    NotificationType[NotificationType["DEBUG"] = 4] = "DEBUG";
-})(NotificationType || (NotificationType = {}));
+var ToasterNotificationType;
+(function (ToasterNotificationType) {
+    ToasterNotificationType[ToasterNotificationType["SUCCESS"] = 0] = "SUCCESS";
+    ToasterNotificationType[ToasterNotificationType["INFO"] = 1] = "INFO";
+    ToasterNotificationType[ToasterNotificationType["WARNING"] = 2] = "WARNING";
+    ToasterNotificationType[ToasterNotificationType["ERROR"] = 3] = "ERROR";
+    ToasterNotificationType[ToasterNotificationType["SNACKBAR"] = 4] = "SNACKBAR";
+})(ToasterNotificationType || (ToasterNotificationType = {}));
 var NotificationEvent;
 (function (NotificationEvent) {
     NotificationEvent[NotificationEvent["ANIMATE_IN"] = 0] = "ANIMATE_IN";

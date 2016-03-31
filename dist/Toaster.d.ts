@@ -9,8 +9,15 @@ declare class Toaster {
     private archivedNotifications;
     subscribers: any[];
     webAnimationsApiPolyfillLoaded: boolean;
-    constructor(options: any);
+    constructor(options?: IToasterOptions);
+    /**
+     * Checks if native web animations API exists.
+     * @returns {boolean}
+     */
     doesNativeWebAnimationsAPIExist(): boolean;
+    /**
+     * Loads the web animations API polyfill, if necessary.
+     */
     loadWebAnimationsPolyfill(): void;
     /**
      * Gets the container. Creates it if it does not already exist, using provided options.
@@ -23,7 +30,7 @@ declare class Toaster {
      * @returns {Element}
      */
     private createContainer(options);
-    notify(type: any, title: any, message: any): void;
+    notify(type: ToasterNotificationType, title: string, message: string): Element;
     private constructNotificationElement(type, title, message);
     private publish(notificationInstance, notificationElement);
     subscribe(callback: Function): void;
@@ -41,14 +48,14 @@ declare class Toaster {
 declare class Notification {
     Title: String;
     Message: String;
-    NotificationType: NotificationType;
+    NotificationType: ToasterNotificationType;
 }
-declare enum NotificationType {
+declare enum ToasterNotificationType {
     SUCCESS = 0,
     INFO = 1,
     WARNING = 2,
     ERROR = 3,
-    DEBUG = 4,
+    SNACKBAR = 4,
 }
 declare enum NotificationEvent {
     ANIMATE_IN = 0,
