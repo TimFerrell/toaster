@@ -136,7 +136,7 @@ var Toaster = (function () {
      */
     Toaster.prototype.clearAllNotificationsWithAnimations = function () {
         this.visibleNotifications.forEach(function (element) {
-            this.clearNotification(element.notificationInstance, element.notificationElement);
+            //this.clearNotification(element.notificationInstance, element.notificationElement)
         });
     };
     Toaster.prototype.clearNotification = function () {

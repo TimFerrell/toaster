@@ -171,7 +171,7 @@ class Toaster {
      */
     private clearAllNotificationsWithAnimations():void {
         this.visibleNotifications.forEach(function (element:IToasterNotificationSubscription) {
-            this.clearNotification(element.notificationInstance, element.notificationElement)
+            //this.clearNotification(element.notificationInstance, element.notificationElement)
         });
     }
 

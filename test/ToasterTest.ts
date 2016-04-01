@@ -41,27 +41,55 @@ describe('Toaster', () => {
     describe('notifications', () => {
         it('should create a notification', () => {
             let container = subject.getContainer();
-            let currentCount = 0;//container.childNodes.length;
-            subject.notify(ToasterNotificationType.INFO, "Lumpo Bumpo", "Pick up my whoopsie.");
-            let modifiedCount = 1;//container.childNodes.length;
-            if(currentCount===modifiedCount) {
+
+            let numberOfStartingNotifications:number = container.querySelectorAll(".toast").length;
+            subject.notify(ToasterNotificationType.INFO, "Generic notification", "Woh zo.");
+            let numberOfEndingNotifications:number = container.querySelectorAll(".toast").length;
+            if((numberOfStartingNotifications+1) !=numberOfEndingNotifications) {
                 throw new Error("Container child count did not change when notification added.")
             }
-            //
+
         });
         it('should create an info notification', () => {
             let container = subject.getContainer();
-            let numberOfInfoNotifications = container.querySelector(".")
+
+            let numberOfStartingInfoNotifications:number = container.querySelectorAll(".toaster-info").length;
             subject.notify(ToasterNotificationType.INFO, "Lumpo Bumpo", "Pick up my whoopsie.");
+            let numberOfEndingInfoNotifications:number = container.querySelectorAll(".toaster-info").length;
+            if((numberOfStartingInfoNotifications+1) != numberOfEndingInfoNotifications) {
+                throw new Error("Info notification not added.");
+            }
         });
         it('should create an error notification', () => {
+            let container = subject.getContainer();
+
+            let numberOfStartingInfoNotifications:number = container.querySelectorAll(".toaster-error").length;
             subject.notify(ToasterNotificationType.ERROR, "Oopsies", "Live your dreams.");
+            let numberOfEndingInfoNotifications:number = container.querySelectorAll(".toaster-error").length;
+            if((numberOfStartingInfoNotifications+1) != numberOfEndingInfoNotifications) {
+                throw new Error("Error notification not added.");
+            }
+        });
+        it('should create an success notification', () => {
+            let container = subject.getContainer();
+
+            let numberOfStartingInfoNotifications:number = container.querySelectorAll(".toaster-success").length;
+            subject.notify(ToasterNotificationType.SUCCESS, "Yes", "Live your dreams.");
+            let numberOfEndingInfoNotifications:number = container.querySelectorAll(".toaster-success").length;
+            if((numberOfStartingInfoNotifications+1) != numberOfEndingInfoNotifications) {
+                throw new Error("Success notification not added.");
+            }
         });
         it('should create a warning notification', () => {
+
+            let container = subject.getContainer();
+
+            let numberOfStartingInfoNotifications:number = container.querySelectorAll(".toaster-warning").length;
             subject.notify(ToasterNotificationType.WARNING, "Princess Bride", "Most overrated movie of all time?");
-        });
-        it('should create an error notification', () => {
-            subject.notify(ToasterNotificationType.ERROR, "Wuh oh.", "Made an uh oh.");
+            let numberOfEndingInfoNotifications:number = container.querySelectorAll(".toaster-warning").length;
+            if((numberOfStartingInfoNotifications+1) != numberOfEndingInfoNotifications) {
+                throw new Error("Warning notification not added.");
+            }
         });
         it('should create a snackbar', () => {
             subject.notify(ToasterNotificationType.SNACKBAR, "Om nom.", "I love to eat snackz!");
