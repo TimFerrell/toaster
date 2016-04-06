@@ -129,29 +129,37 @@ class Toaster {
 
         let titleElement = this.constructNotificationTitleElement(title);
         let messageElement = this.constructNotificationMessageElement(message);
+        let iconElement = this.constructNotificationIconElement();
 
         let element = document.createElement('div');
             element.classList.add(this.options.toastClass);
             element.classList.add(toastClass);
 
+        element.appendChild(iconElement);
         element.appendChild(titleElement);
         element.appendChild(messageElement);
 
         return element;
     }
 
-    private constructNotificationTitleElement(title:string) {
+    private constructNotificationTitleElement(title:string):Element {
         let toastTitle = document.createElement('div');
             toastTitle.classList.add(this.options.titleClass);
             toastTitle.innerHTML = title;
         return toastTitle;
     }
 
-    private constructNotificationMessageElement(message:string) {
+    private constructNotificationMessageElement(message:string):Element {
         let toastMessage = document.createElement('div');
             toastMessage.classList.add(this.options.messageClass);
             toastMessage.innerHTML = message;
         return toastMessage;
+    }
+
+    private constructNotificationIconElement():Element {
+        let icon = document.createElement('div');
+            icon.classList.add("toaster-icon");
+        return icon;
     }
 
     private publish(notificationInstance, notificationElement) {

@@ -128,35 +128,35 @@ button.toaster-close-button {
   margin-left: auto;
   margin-right: auto;
 }
-.toaster {
+.toast {
   background-color: #030303;
 }
 .toaster-success {
   background-color: #FFFFFF;
   border: 1px solid #15b51e;
 }
-.toaster-success .toast-icon {
+.toaster-success .toaster-icon {
   background-color: #15b51e;
 }
 .toaster-error {
   background-color: #FFFFFF;
   border: 1px solid #BD362F;
 }
-.toaster-error .toast-icon {
+.toaster-error .toaster-icon {
   background-color: #BD362F;
 }
 .toaster-info {
   background-color: #FFFFFF;
   border: 1px solid #1072ba;
 }
-.toaster-info .toast-icon {
+.toaster-info .toaster-icon {
   background-color: #1072ba;
 }
 .toaster-warning {
   background-color: #FFFFFF;
   border: 1px solid #F89406;
 }
-.toaster-warning .toast-icon {
+.toaster-warning .toaster-icon {
   background-color: #F89406;
 }
 .toaster-progress {
@@ -175,7 +175,7 @@ button.toaster-close-button {
     padding: 8px 8px 8px 50px;
     width: 11em;
   }
-  #toaster-container .toast-close-button {
+  #toaster-container .toaster-close-button {
     right: -0.2em;
     top: -0.2em;
   }
@@ -185,7 +185,7 @@ button.toaster-close-button {
     padding: 8px 8px 8px 50px;
     width: 18em;
   }
-  #toaster-container .toast-close-button {
+  #toaster-container .toaster-close-button {
     right: -0.2em;
     top: -0.2em;
   }

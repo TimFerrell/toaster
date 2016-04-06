@@ -34,6 +34,7 @@ declare class Toaster {
     private constructNotificationElement(type, title, message);
     private constructNotificationTitleElement(title);
     private constructNotificationMessageElement(message);
+    private constructNotificationIconElement();
     private publish(notificationInstance, notificationElement);
     subscribe(callback: Function): void;
     clearAllNotifications(options: String): void;

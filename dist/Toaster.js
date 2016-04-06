@@ -100,9 +100,11 @@ var Toaster = (function () {
         }
         var titleElement = this.constructNotificationTitleElement(title);
         var messageElement = this.constructNotificationMessageElement(message);
+        var iconElement = this.constructNotificationIconElement();
         var element = document.createElement('div');
         element.classList.add(this.options.toastClass);
         element.classList.add(toastClass);
+        element.appendChild(iconElement);
         element.appendChild(titleElement);
         element.appendChild(messageElement);
         return element;
@@ -118,6 +120,11 @@ var Toaster = (function () {
         toastMessage.classList.add(this.options.messageClass);
         toastMessage.innerHTML = message;
         return toastMessage;
+    };
+    Toaster.prototype.constructNotificationIconElement = function () {
+        var icon = document.createElement('div');
+        icon.classList.add("toaster-icon");
+        return icon;
     };
     Toaster.prototype.publish = function (notificationInstance, notificationElement) {
         this.subscribers.forEach(function (subscriber) {

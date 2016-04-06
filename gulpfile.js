@@ -16,4 +16,6 @@ gulp.task('styles', function() {
         .pipe(gulp.dest(config.build));
 });
 
-gulp.task('default', ['connect']);
+
+
+gulp.task('default', ['styles', 'connect']);
