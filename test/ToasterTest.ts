@@ -90,6 +90,8 @@ describe('Toaster', () => {
             if((numberOfStartingInfoNotifications+1) != numberOfEndingInfoNotifications) {
                 throw new Error("Warning notification not added.");
             }
+
+            console.log(container);
         });
         it('should create a snackbar', () => {
             subject.notify(ToasterNotificationType.SNACKBAR, "Om nom.", "I love to eat snackz!");
@@ -130,6 +132,10 @@ describe('Toaster', () => {
             let container = subject.getContainer(options);
             if (container.parentNode.nodeName !== "HEAD") {
                 throw new Error("Container did not attach to the head.")
+            }
+
+            if(container !== null) {
+                container.parentNode.removeChild(container)
             }
         });
         it('should have aria-live polite', () => {

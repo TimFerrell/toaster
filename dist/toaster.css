@@ -1,0 +1,197 @@
+.toaster-title {
+  color: #030303;
+  font-weight: bold;
+  padding: 10px 0px 10px 50px;
+  font-size: 10pt;
+}
+.toaster-message {
+  color: #030303;
+  padding: 0 0 0 50px;
+  font-size: 10pt;
+}
+.toaster-message {
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+}
+.toaster-message a,
+.toaster-message label {
+  color: #030303;
+}
+.toaster-message a:hover {
+  color: #CCCCCC;
+  text-decoration: none;
+}
+.toaster-close-button {
+  position: absolute;
+  right: .4em;
+  bottom: .4em;
+  float: right;
+  font-size: 12pt;
+  font-weight: bold;
+  color: #030303;
+  cursor: pointer;
+}
+/*Additional properties for button version
+ iOS requires the button element instead of an anchor tag.
+ If you want the anchor version, it requires `href="#"`.*/
+button.toaster-close-button {
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+.toaster-top-center {
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+.toaster-bottom-center {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+.toaster-top-full-width {
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+.toaster-bottom-full-width {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+.toaster-top-left {
+  top: 12px;
+  left: 12px;
+}
+.toaster-top-right {
+  top: 12px;
+  right: 12px;
+}
+.toaster-bottom-right {
+  right: 12px;
+  bottom: 12px;
+}
+.toaster-bottom-left {
+  bottom: 12px;
+  left: 12px;
+}
+#toaster-container {
+  font-family: 'Roboto', sans-serif;
+  position: fixed;
+  z-index: 999999;
+  pointer-events: none;
+  /*overrides*/
+}
+#toaster-container * {
+  box-sizing: border-box;
+}
+#toaster-container > div {
+  position: relative;
+  pointer-events: auto;
+  overflow: hidden;
+  margin: 0 0 6px;
+  width: 300px;
+  background-position: 15px center;
+  background-repeat: no-repeat;
+  box-shadow: 0 0 5px #999999;
+  color: #FFFFFF;
+  opacity: 0.8;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  filter: alpha(opacity=80);
+}
+#toaster-container > :hover {
+  box-shadow: 0 0 5px #000000;
+  opacity: 1;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  filter: alpha(opacity=100);
+  cursor: pointer;
+}
+#toaster-container .toaster-icon {
+  float: left;
+  height: 100px;
+  width: 40px;
+}
+#toaster-container .toaster-icon > i {
+  padding: 12px 15px 15px 15px;
+}
+#toaster-container.toaster-top-center > div,
+#toaster-container.toaster-bottom-center > div {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#toaster-container.toaster-top-full-width > div,
+#toaster-container.toaster-bottom-full-width > div {
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.toaster {
+  background-color: #030303;
+}
+.toaster-success {
+  background-color: #FFFFFF;
+  border: 1px solid #15b51e;
+}
+.toaster-success .toast-icon {
+  background-color: #15b51e;
+}
+.toaster-error {
+  background-color: #FFFFFF;
+  border: 1px solid #BD362F;
+}
+.toaster-error .toast-icon {
+  background-color: #BD362F;
+}
+.toaster-info {
+  background-color: #FFFFFF;
+  border: 1px solid #1072ba;
+}
+.toaster-info .toast-icon {
+  background-color: #1072ba;
+}
+.toaster-warning {
+  background-color: #FFFFFF;
+  border: 1px solid #F89406;
+}
+.toaster-warning .toast-icon {
+  background-color: #F89406;
+}
+.toaster-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  background-color: #000000;
+  opacity: 0.4;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+  filter: alpha(opacity=40);
+}
+/*Responsive Design*/
+@media all and (max-width: 240px) {
+  #toaster-container > div {
+    padding: 8px 8px 8px 50px;
+    width: 11em;
+  }
+  #toaster-container .toast-close-button {
+    right: -0.2em;
+    top: -0.2em;
+  }
+}
+@media all and (min-width: 241px) and (max-width: 480px) {
+  #toaster-container > div {
+    padding: 8px 8px 8px 50px;
+    width: 18em;
+  }
+  #toaster-container .toast-close-button {
+    right: -0.2em;
+    top: -0.2em;
+  }
+}
+@media all and (min-width: 481px) and (max-width: 768px) {
+  #toaster-container > div {
+    width: 25em;
+  }
+}

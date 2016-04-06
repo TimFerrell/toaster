@@ -1,0 +1,269 @@
+// Mix-ins
+.boxShadow(@boxShadow) {
+  -moz-box-shadow: @boxShadow;
+  -webkit-box-shadow: @boxShadow;
+  box-shadow: @boxShadow;
+}
+
+.opacity(@opacity) {
+  @opacityPercent: @opacity * 100;
+  opacity: @opacity;
+  -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(Opacity=@{opacityPercent})";
+  filter: ~"alpha(opacity=@{opacityPercent})";
+}
+
+.wordWrap(@wordWrap: break-word) {
+  -ms-word-wrap: @wordWrap;
+  word-wrap: @wordWrap;
+}
+
+// Variables
+@black: #000000;
+@grey: #999999;
+@light-grey: #CCCCCC;
+@white: #FFFFFF;
+@near-black: #030303;
+@green: rgb(21,181,30);
+@red: #BD362F;
+@blue: rgb(16,114,186);
+@orange: #F89406;
+@default-container-opacity: .8;
+@default-background-color: @white;
+
+// Styles
+.toaster-title {
+  color: @near-black;
+  font-weight: bold;
+  padding: 10px 0px 10px 50px;
+  font-size: 10pt;
+}
+
+.toaster-message {
+  color: @near-black;
+  padding: 0 0 0 50px;
+  font-size: 10pt;
+}
+
+.toaster-message {
+  .wordWrap();
+
+  a,
+  label {
+    color: @near-black;
+  }
+
+  a:hover {
+    color: @light-grey;
+    text-decoration: none;
+  }
+}
+
+.toaster-close-button {
+  position: absolute;
+  right: .4em;
+  bottom: .4em;
+  float: right;
+  font-size: 12pt;
+  font-weight: bold;
+  color: @near-black;
+  cursor: pointer;
+}
+
+/*Additional properties for button version
+ iOS requires the button element instead of an anchor tag.
+ If you want the anchor version, it requires `href="#"`.*/
+button.toaster-close-button {
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+
+//#endregion
+
+.toaster-top-center {
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+
+.toaster-bottom-center {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+
+.toaster-top-full-width {
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+
+.toaster-bottom-full-width {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+
+.toaster-top-left {
+  top: 12px;
+  left: 12px;
+}
+
+.toaster-top-right {
+  top: 12px;
+  right: 12px;
+}
+
+.toaster-bottom-right {
+  right: 12px;
+  bottom: 12px;
+}
+
+.toaster-bottom-left {
+  bottom: 12px;
+  left: 12px;
+}
+
+#toaster-container {
+  font-family: 'Roboto', sans-serif;
+  position: fixed;
+  z-index: 999999;
+  // The container should not be clickable.
+  pointer-events: none;
+  * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  > div {
+    position: relative;
+    // The toast itself should be clickable.
+    pointer-events: auto;
+    overflow: hidden;
+    margin: 0 0 6px;
+    width: 300px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    .boxShadow(0 0 5px @grey);
+    color: @white;
+    .opacity(@default-container-opacity);
+  }
+
+  > :hover {
+    .boxShadow(0 0 5px @black);
+    .opacity(1);
+    cursor: pointer;
+  }
+
+  .toaster-icon {
+    float:left;
+    height:100px;
+    width:40px;
+  }
+
+  .toaster-icon > i {
+    padding:12px 15px 15px 15px;
+  }
+
+  /*overrides*/
+  &.toaster-top-center > div,
+  &.toaster-bottom-center > div {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &.toaster-top-full-width > div,
+  &.toaster-bottom-full-width > div {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.toaster {
+  background-color: @near-black;
+}
+
+.toaster-success {
+  background-color: @default-background-color;
+  border: 1px solid @green;
+  .toaster-icon {
+    background-color: @green;
+  }
+}
+
+.toaster-error {
+  background-color: @default-background-color;
+  border: 1px solid @red;
+  .toaster-icon {
+    background-color: @red;
+  }
+}
+
+.toaster-info {
+  background-color: @default-background-color;
+  border: 1px solid @blue;
+  .toaster-icon {
+    background-color: @blue;
+  }
+}
+
+.toaster-warning {
+  background-color: @default-background-color;
+  border: 1px solid @orange;
+  .toaster-icon {
+    background-color: @orange;
+  }
+}
+
+.toaster-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  background-color: @black;
+  .opacity(0.4);
+}
+
+/*Responsive Design*/
+
+@media all and (max-width: 240px) {
+  #toaster-container {
+
+    > div {
+      padding: 8px 8px 8px 50px;
+      width: 11em;
+    }
+
+    & .toaster-close-button {
+      right: -0.2em;
+      top: -0.2em;
+    }
+  }
+}
+
+@media all and (min-width: 241px) and (max-width: 480px) {
+  #toaster-container {
+    > div {
+      padding: 8px 8px 8px 50px;
+      width: 18em;
+    }
+
+    & .toaster-close-button {
+      right: -0.2em;
+      top: -0.2em;
+    }
+  }
+}
+
+@media all and (min-width: 481px) and (max-width: 768px) {
+  #toaster-container {
+    > div {
+      width: 25em;
+    }
+  }
+}

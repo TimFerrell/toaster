@@ -32,6 +32,8 @@ declare class Toaster {
     private createContainer(options);
     notify(type: ToasterNotificationType, title: string, message: string): Element;
     private constructNotificationElement(type, title, message);
+    private constructNotificationTitleElement(title);
+    private constructNotificationMessageElement(message);
     private publish(notificationInstance, notificationElement);
     subscribe(callback: Function): void;
     clearAllNotifications(options: String): void;

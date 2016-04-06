@@ -98,10 +98,26 @@ var Toaster = (function () {
                 toastClass = "toaster-warning";
                 break;
         }
+        var titleElement = this.constructNotificationTitleElement(title);
+        var messageElement = this.constructNotificationMessageElement(message);
         var element = document.createElement('div');
         element.classList.add(this.options.toastClass);
         element.classList.add(toastClass);
+        element.appendChild(titleElement);
+        element.appendChild(messageElement);
         return element;
+    };
+    Toaster.prototype.constructNotificationTitleElement = function (title) {
+        var toastTitle = document.createElement('div');
+        toastTitle.classList.add(this.options.titleClass);
+        toastTitle.innerHTML = title;
+        return toastTitle;
+    };
+    Toaster.prototype.constructNotificationMessageElement = function (message) {
+        var toastMessage = document.createElement('div');
+        toastMessage.classList.add(this.options.messageClass);
+        toastMessage.innerHTML = message;
+        return toastMessage;
     };
     Toaster.prototype.publish = function (notificationInstance, notificationElement) {
         this.subscribers.forEach(function (subscriber) {
@@ -170,10 +186,10 @@ var NotificationClearMethod;
 })(NotificationClearMethod || (NotificationClearMethod = {}));
 var ToasterOptions = (function () {
     function ToasterOptions() {
-        this.toastClass = "toast";
-        this.containerId = "toast-container";
-        this.titleClass = "toast-title";
-        this.messageClass = "toast-message";
+        this.toastClass = "toaster";
+        this.containerId = "toaster-container";
+        this.titleClass = "toaster-title";
+        this.messageClass = "toaster-message";
         this.showDuration = 1000;
         this.hideDuration = 1000;
         this.timeout = 1000;

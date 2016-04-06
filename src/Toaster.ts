@@ -127,11 +127,31 @@ class Toaster {
                 break;
         }
 
+        let titleElement = this.constructNotificationTitleElement(title);
+        let messageElement = this.constructNotificationMessageElement(message);
+
         let element = document.createElement('div');
             element.classList.add(this.options.toastClass);
             element.classList.add(toastClass);
 
+        element.appendChild(titleElement);
+        element.appendChild(messageElement);
+
         return element;
+    }
+
+    private constructNotificationTitleElement(title:string) {
+        let toastTitle = document.createElement('div');
+            toastTitle.classList.add(this.options.titleClass);
+            toastTitle.innerHTML = title;
+        return toastTitle;
+    }
+
+    private constructNotificationMessageElement(message:string) {
+        let toastMessage = document.createElement('div');
+            toastMessage.classList.add(this.options.messageClass);
+            toastMessage.innerHTML = message;
+        return toastMessage;
     }
 
     private publish(notificationInstance, notificationElement) {
@@ -212,10 +232,10 @@ interface IToasterNotificationSubscription {
 }
 
 class ToasterOptions implements IToasterOptions {
-    toastClass:string = "toast";
-    containerId:string = "toast-container";
-    titleClass:string = "toast-title";
-    messageClass:string = "toast-message";
+    toastClass:string = "toaster";
+    containerId:string = "toaster-container";
+    titleClass:string = "toaster-title";
+    messageClass:string = "toaster-message";
     showDuration:Number = 1000;
     hideDuration:Number = 1000;
     timeout:Number = 1000;
