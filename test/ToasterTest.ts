@@ -42,9 +42,9 @@ describe('Toaster', () => {
         it('should create a notification', () => {
             let container = subject.getContainer();
 
-            let numberOfStartingNotifications:number = container.querySelectorAll(".toast").length;
+            let numberOfStartingNotifications:number = container.querySelectorAll(".toaster").length;
             subject.notify(ToasterNotificationType.INFO, "Generic notification", "Woh zo.");
-            let numberOfEndingNotifications:number = container.querySelectorAll(".toast").length;
+            let numberOfEndingNotifications:number = container.querySelectorAll(".toaster").length;
             if((numberOfStartingNotifications+1) !=numberOfEndingNotifications) {
                 throw new Error("Container child count did not change when notification added.")
             }
@@ -90,12 +90,31 @@ describe('Toaster', () => {
             if((numberOfStartingInfoNotifications+1) != numberOfEndingInfoNotifications) {
                 throw new Error("Warning notification not added.");
             }
-
-            console.log(container);
         });
         it('should create a snackbar', () => {
             subject.notify(ToasterNotificationType.SNACKBAR, "Om nom.", "I love to eat snackz!");
         });
+        it('should have one title element', () => {
+            let toast = subject.notify(ToasterNotificationType.WARNING, "Title Element", "I have?");
+            let numberOfTitleElements = toast.querySelectorAll(".toaster-title").length;
+            if(numberOfTitleElements!==1) {
+                throw new Error("Title element count not equal to one.")
+            }
+        });
+        it('should have a message element', () => {
+            let toast = subject.notify(ToasterNotificationType.WARNING, "Message Element", "I have?");
+            let numberOfMessageElements = toast.querySelectorAll(".toaster-message").length;
+            if(numberOfMessageElements!==1) {
+                throw new Error("Message element count not equal to one.")
+            }
+        });
+        it('should have an icon element', () => {
+            let toast = subject.notify(ToasterNotificationType.WARNING, "Icon Element", "I have?");
+            let numberOfIconElements = toast.querySelectorAll(".toaster-icon").length;
+            if(numberOfIconElements!==1) {
+                throw new Error("Icon element count not equal to one.")
+            }
+        })
     });
 
     describe('container', function () {
