@@ -5,12 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=8;FF=3;OtherUA=4" />
     <link rel="stylesheet" href="../dist/toaster.css"/>
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
 </head>
 <body>
 <script src="../dist/Toaster.js"></script>
 <script>
     var toaster = new Toaster();
     toaster.notify(ToasterNotificationType.ERROR,"UH OH","Made a baddie.");
+    toaster.notify(ToasterNotificationType.INFO,"UH OH","Made a baddie.");
+    toaster.notify(ToasterNotificationType.SUCCESS,"UH OH","Made a baddie.");
+    toaster.notify(ToasterNotificationType.WARNING,"UH OH","Made a baddie.");
 </script>
 </body>
 </html>
