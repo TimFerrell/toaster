@@ -138,12 +138,20 @@ button.toaster-close-button {
 .toaster-success .toaster-icon {
   background-color: #15b51e;
 }
+.toaster-success .toaster-icon::before {
+  font-family: FontAwesome;
+  content: "\f00c";
+}
 .toaster-error {
   background-color: #FFFFFF;
   border: 1px solid #BD362F;
 }
 .toaster-error .toaster-icon {
   background-color: #BD362F;
+}
+.toaster-error .toaster-icon::before {
+  font-family: FontAwesome;
+  content: "\f06a";
 }
 .toaster-info {
   background-color: #FFFFFF;
@@ -152,12 +160,20 @@ button.toaster-close-button {
 .toaster-info .toaster-icon {
   background-color: #1072ba;
 }
+.toaster-info .toaster-icon::before {
+  font-family: FontAwesome;
+  content: "\f05a";
+}
 .toaster-warning {
   background-color: #FFFFFF;
   border: 1px solid #F89406;
 }
 .toaster-warning .toaster-icon {
   background-color: #F89406;
+}
+.toaster-warning .toaster-icon::before {
+  font-family: FontAwesome;
+  content: "\f071";
 }
 .toaster-progress {
   position: absolute;

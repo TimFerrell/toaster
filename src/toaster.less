@@ -194,6 +194,10 @@ button.toaster-close-button {
   .toaster-icon {
     background-color: @green;
   }
+  .toaster-icon::before {
+    font-family: FontAwesome;
+    content: "\f00c";
+  }
 }
 
 .toaster-error {
@@ -201,6 +205,10 @@ button.toaster-close-button {
   border: 1px solid @red;
   .toaster-icon {
     background-color: @red;
+  }
+  .toaster-icon::before {
+    font-family: FontAwesome;
+    content: "\f06a";
   }
 }
 
@@ -210,6 +218,10 @@ button.toaster-close-button {
   .toaster-icon {
     background-color: @blue;
   }
+  .toaster-icon::before {
+    font-family: FontAwesome;
+    content: "\f05a";
+  }
 }
 
 .toaster-warning {
@@ -217,6 +229,10 @@ button.toaster-close-button {
   border: 1px solid @orange;
   .toaster-icon {
     background-color: @orange;
+  }
+  .toaster-icon::before {
+    font-family: FontAwesome;
+    content: "\f071";
   }
 }
 
