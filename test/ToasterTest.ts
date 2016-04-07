@@ -91,9 +91,6 @@ describe('Toaster', () => {
                 throw new Error("Warning notification not added.");
             }
         });
-        it('should create a snackbar', () => {
-            subject.notify(ToasterNotificationType.SNACKBAR, "Om nom.", "I love to eat snackz!");
-        });
         it('should have one title element', () => {
             let toast = subject.notify(ToasterNotificationType.WARNING, "Title Element", "I have?");
             let numberOfTitleElements = toast.querySelectorAll(".toaster-title").length;
@@ -117,7 +114,25 @@ describe('Toaster', () => {
         })
     });
 
-    describe('container', function () {
+    describe('snackbar container', () => {
+        it('should create a snackbar container', () => {
+            //TODO
+        });
+    });
+
+    describe('snackbars', ()=>{
+        it('should be within the snackbar container', () => {
+            //TODO
+        });
+        it('should create a single line snackbar', () => {
+            //TODO
+        });
+        it('should create a double line snackbar', () => {
+            //TODO
+        });
+    });
+
+    describe('container', () => {
         it('should create a container', () => {
             let container = subject.getContainer();
             if(container === null) {
