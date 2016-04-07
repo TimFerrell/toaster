@@ -112,6 +112,8 @@ button.toaster-close-button {
   float: left;
   height: 100px;
   width: 40px;
+  padding-top: 10px;
+  padding-left: 8px;
 }
 #toaster-container .toaster-icon > i {
   padding: 12px 15px 15px 15px;
@@ -141,6 +143,7 @@ button.toaster-close-button {
 .toaster-success .toaster-icon::before {
   font-family: FontAwesome;
   content: "\f00c";
+  font-size: 25px;
 }
 .toaster-error {
   background-color: #FFFFFF;
@@ -152,6 +155,7 @@ button.toaster-close-button {
 .toaster-error .toaster-icon::before {
   font-family: FontAwesome;
   content: "\f06a";
+  font-size: 25px;
 }
 .toaster-info {
   background-color: #FFFFFF;
@@ -163,6 +167,7 @@ button.toaster-close-button {
 .toaster-info .toaster-icon::before {
   font-family: FontAwesome;
   content: "\f05a";
+  font-size: 25px;
 }
 .toaster-warning {
   background-color: #FFFFFF;
@@ -174,6 +179,7 @@ button.toaster-close-button {
 .toaster-warning .toaster-icon::before {
   font-family: FontAwesome;
   content: "\f071";
+  font-size: 25px;
 }
 .toaster-progress {
   position: absolute;
