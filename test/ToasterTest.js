@@ -79,9 +79,6 @@ describe('Toaster', function () {
                 throw new Error("Warning notification not added.");
             }
         });
-        it('should create a snackbar', function () {
-            subject.notify(ToasterNotificationType.SNACKBAR, "Om nom.", "I love to eat snackz!");
-        });
         it('should have one title element', function () {
             var toast = subject.notify(ToasterNotificationType.WARNING, "Title Element", "I have?");
             var numberOfTitleElements = toast.querySelectorAll(".toaster-title").length;
@@ -102,6 +99,22 @@ describe('Toaster', function () {
             if (numberOfIconElements !== 1) {
                 throw new Error("Icon element count not equal to one.");
             }
+        });
+    });
+    describe('snackbar container', function () {
+        it('should create a snackbar container', function () {
+            //TODO
+        });
+    });
+    describe('snackbars', function () {
+        it('should be within the snackbar container', function () {
+            //TODO
+        });
+        it('should create a single line snackbar', function () {
+            //TODO
+        });
+        it('should create a double line snackbar', function () {
+            //TODO
         });
     });
     describe('container', function () {
